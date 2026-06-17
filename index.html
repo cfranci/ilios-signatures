@@ -136,11 +136,12 @@
 
 <script>
   // ---- team roster (editable defaults) ----
+  const PHOTO_BASE = "https://cfranci.github.io/ilios-signatures/assets/";
   const TEAM = [
-    { role:"Vision & Partnerships", name:"Dimitri",  title:"Co-Founder", email:"dimitri@iliosrentals.com", phone:"786-353-6363", mobile:"", ig:"iliosrentals" },
-    { role:"Operations",            name:"Rolland",  title:"Co-Founder", email:"rolland@iliosrentals.com", phone:"786-353-6363", mobile:"", ig:"iliosrentals" },
-    { role:"Owner Relations",       name:"Your Name",title:"Owner Relations & Administration", email:"owners@iliosrentals.com", phone:"786-353-6363", mobile:"", ig:"iliosrentals" },
-    { role:"New teammate",          name:"Your Name",title:"Your Title", email:"name@iliosrentals.com", phone:"786-353-6363", mobile:"", ig:"iliosrentals" },
+    { role:"Vision & Partnerships",    name:"Dimitri",  title:"Co-Founder", email:"dimitri@iliosrentals.com", phone:"786-353-6363", mobile:"", ig:"iliosrentals", photo: PHOTO_BASE+"dimitri.jpg" },
+    { role:"Owner Relations & Licensing", name:"Beatrice", title:"Owner Relations & Administration", email:"beatrice@iliosrentals.com", phone:"786-353-6363", mobile:"", ig:"iliosrentals", photo: PHOTO_BASE+"beatrice.jpg" },
+    { role:"Operations",               name:"Rolland",  title:"Co-Founder", email:"rolland@iliosrentals.com", phone:"786-353-6363", mobile:"", ig:"iliosrentals", photo:"" },
+    { role:"New teammate",             name:"Your Name",title:"Your Title", email:"name@iliosrentals.com", phone:"786-353-6363", mobile:"", ig:"iliosrentals", photo:"" },
   ];
 
   const esc = s => String(s||"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
@@ -160,15 +161,21 @@
     const igRow = d.ig
       ? `<br><a href="https://instagram.com/${esc(d.ig)}" style="color:#347e8f;text-decoration:none;">@${esc(d.ig)}</a>`
       : "";
+    const leftCell = d.photo
+      ? `<a href="${SITE}" style="text-decoration:none;border:0;" target="_blank"><img src="${esc(d.photo)}" alt="${esc(d.name)}" width="104" height="104" style="display:block;width:104px;height:104px;border-radius:16px;object-fit:cover;border:0;outline:none;-ms-interpolation-mode:bicubic;" /></a>`
+      : `<a href="${SITE}" style="text-decoration:none;border:0;" target="_blank"><img src="${LOGO}" alt="Ilios Rentals" width="160" style="display:block;width:160px;height:auto;border:0;outline:none;-ms-interpolation-mode:bicubic;" /></a>`;
+    const brandRow = d.photo
+      ? `<div style="font-family:Georgia,'Times New Roman',serif;font-size:12px;color:#8b734c;letter-spacing:.4px;margin:0 0 9px;">iL<span style="font-style:italic;">i</span>OS&nbsp;&middot;&nbsp;Premium Vacation Rentals</div>`
+      : "";
     return `<table cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse;font-family:Arial,Helvetica,sans-serif;color:#463939;">
   <tr>
     <td style="vertical-align:top;padding:2px 22px 2px 0;border-right:2px solid #c9a961;">
-      <a href="${SITE}" style="text-decoration:none;border:0;" target="_blank"><img src="${LOGO}" alt="Ilios Rentals" width="160" style="display:block;width:160px;height:auto;border:0;outline:none;-ms-interpolation-mode:bicubic;" /></a>
+      ${leftCell}
     </td>
     <td style="vertical-align:top;padding:0 0 0 22px;">
       <div style="font-family:Georgia,'Times New Roman',serif;font-size:17px;font-weight:bold;color:#463939;line-height:1.2;">${esc(d.name)}</div>
       <div style="font-family:Arial,Helvetica,sans-serif;font-size:10px;letter-spacing:1.6px;text-transform:uppercase;color:#347e8f;margin:4px 0 9px;">${esc(d.title)}</div>
-      <div style="font-family:Arial,Helvetica,sans-serif;font-size:12px;color:#463939;line-height:1.8;">
+      ${brandRow}<div style="font-family:Arial,Helvetica,sans-serif;font-size:12px;color:#463939;line-height:1.8;">
         ${mobileRow}<a href="${telHref(d.phone)}" style="color:#463939;text-decoration:none;">${esc(d.phone)}</a><br>
         <a href="mailto:${esc(d.email)}" style="color:#347e8f;text-decoration:none;">${esc(d.email)}</a><br>
         <a href="${SITE}" style="color:#347e8f;text-decoration:none;font-weight:bold;" target="_blank">iliosrentals.com</a><br>
@@ -195,6 +202,7 @@
         <label><div class="lab">Phone (office)</div><input data-k="phone"  data-i="${i}" value="${esc(person.phone)}"></label>
         <label><div class="lab">Mobile (optional)</div><input data-k="mobile" data-i="${i}" value="${esc(person.mobile)}" placeholder="leave blank to hide"></label>
         <label class="full"><div class="lab">Instagram handle (optional, no @)</div><input data-k="ig" data-i="${i}" value="${esc(person.ig)}" placeholder="leave blank to hide"></label>
+        <label class="full"><div class="lab">Headshot URL (optional — blank shows the Ilios logo instead)</div><input data-k="photo" data-i="${i}" value="${esc(person.photo)}" placeholder="https://cfranci.github.io/ilios-signatures/assets/name.jpg"></label>
       </div>
       <div class="row">
         <button class="copy" data-i="${i}">Copy signature</button>
