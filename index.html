@@ -140,6 +140,7 @@
   const TEAM = [
     { role:"Vision & Partnerships",    name:"Dimitri",  title:"Co-Founder", email:"dimitri@iliosrentals.com", phone:"786-353-6363", mobile:"", ig:"iliosrentals", photo: PHOTO_BASE+"dimitri.jpg" },
     { role:"Owner Relations & Licensing", name:"Beatrice Gauthier", title:"Owner Relations & Administration", email:"beatrice@iliosrentals.com", phone:"786-353-6363", mobile:"", ig:"iliosrentals", photo: PHOTO_BASE+"beatrice.jpg" },
+    { role:"Management (general account, no name)", name:"", title:"Management", email:"management@iliosrentals.com", phone:"786-353-6363", mobile:"", ig:"iliosrentals", photo:"" },
     { role:"Operations",               name:"Rolland",  title:"Co-Founder", email:"rolland@iliosrentals.com", phone:"786-353-6363", mobile:"", ig:"iliosrentals", photo:"" },
     { role:"New teammate",             name:"Your Name",title:"Your Title", email:"name@iliosrentals.com", phone:"786-353-6363", mobile:"", ig:"iliosrentals", photo:"" },
   ];
@@ -161,21 +162,20 @@
     const igRow = d.ig
       ? `<br><a href="https://instagram.com/${esc(d.ig)}" style="color:#347e8f;text-decoration:none;">@${esc(d.ig)}</a>`
       : "";
-    const leftCell = d.photo
-      ? `<a href="${SITE}" style="text-decoration:none;border:0;" target="_blank"><img src="${esc(d.photo)}" alt="${esc(d.name)}" width="104" height="104" style="display:block;width:104px;height:104px;border-radius:16px;object-fit:cover;border:0;outline:none;-ms-interpolation-mode:bicubic;" /></a>`
-      : `<a href="${SITE}" style="text-decoration:none;border:0;" target="_blank"><img src="${LOGO}" alt="Ilios Rentals" width="160" style="display:block;width:160px;height:auto;border:0;outline:none;-ms-interpolation-mode:bicubic;" /></a>`;
-    const brandRow = d.photo
-      ? `<div style="font-family:Georgia,'Times New Roman',serif;font-size:12px;color:#8b734c;letter-spacing:.4px;margin:0 0 9px;">iL<span style="font-style:italic;">i</span>OS&nbsp;&middot;&nbsp;Premium Vacation Rentals</div>`
+    const photoBlock = d.photo
+      ? `<img src="${esc(d.photo)}" alt="${esc(d.name)}" width="84" height="84" style="display:block;width:84px;height:84px;border-radius:50%;object-fit:cover;border:2px solid #c9a961;outline:none;margin:0 auto 12px;-ms-interpolation-mode:bicubic;" />`
+      : "";
+    const nameRow = d.name
+      ? `<div style="font-family:Georgia,'Times New Roman',serif;font-size:17px;font-weight:bold;color:#463939;line-height:1.2;">${esc(d.name)}</div>`
       : "";
     return `<table cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse;font-family:Arial,Helvetica,sans-serif;color:#463939;">
   <tr>
-    <td style="vertical-align:top;padding:2px 22px 2px 0;border-right:2px solid #c9a961;">
-      ${leftCell}
+    <td style="vertical-align:top;padding:2px 22px 2px 0;border-right:2px solid #c9a961;text-align:center;">
+      ${photoBlock}<a href="${SITE}" style="text-decoration:none;border:0;" target="_blank"><img src="${LOGO}" alt="Ilios Rentals" width="150" style="display:block;width:150px;height:auto;border:0;outline:none;margin:0 auto;-ms-interpolation-mode:bicubic;" /></a>
     </td>
     <td style="vertical-align:top;padding:0 0 0 22px;">
-      <div style="font-family:Georgia,'Times New Roman',serif;font-size:17px;font-weight:bold;color:#463939;line-height:1.2;">${esc(d.name)}</div>
-      <div style="font-family:Arial,Helvetica,sans-serif;font-size:10px;letter-spacing:1.6px;text-transform:uppercase;color:#347e8f;margin:4px 0 9px;">${esc(d.title)}</div>
-      ${brandRow}<div style="font-family:Arial,Helvetica,sans-serif;font-size:12px;color:#463939;line-height:1.8;">
+      ${nameRow}<div style="font-family:Arial,Helvetica,sans-serif;font-size:10px;letter-spacing:1.6px;text-transform:uppercase;color:#347e8f;margin:4px 0 9px;">${esc(d.title)}</div>
+      <div style="font-family:Arial,Helvetica,sans-serif;font-size:12px;color:#463939;line-height:1.8;">
         ${mobileRow}<a href="${telHref(d.phone)}" style="color:#463939;text-decoration:none;">${esc(d.phone)}</a><br>
         <a href="mailto:${esc(d.email)}" style="color:#347e8f;text-decoration:none;">${esc(d.email)}</a><br>
         <a href="${SITE}" style="color:#347e8f;text-decoration:none;font-weight:bold;" target="_blank">iliosrentals.com</a><br>
